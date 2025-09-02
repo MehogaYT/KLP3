@@ -1,697 +1,495 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Razzak - Portfolio</title>
-  <style>
-    /* Reset and base */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 80px;
-    }
-
-    body {
-      background-color: #0a0a0a;
-      color: #ffffff;
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    /* Header */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 40px;
-      background: rgba(15, 15, 15, 0.95);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .header img {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 2px solid #00ffff;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .header img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-    }
-
-    .info {
-      color: #00ffff;
-      font-weight: 600;
-    }
-
-    .info div {
-      margin: 2px 0;
-      font-size: 0.9rem;
-    }
-
-    /* Hamburger */
-    .hamburger {
-      position: relative;
-      width: 30px;
-      height: 20px;
-      cursor: pointer;
-      z-index: 1001;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hamburger span {
-      position: absolute;
-      width: 100%;
-      height: 3px;
-      background: #00ffff;
-      border-radius: 2px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      left: 0;
-    }
-
-    .hamburger span:nth-child(1) {
-      top: 0;
-    }
-
-    .hamburger span:nth-child(2) {
-      bottom: 0;
-    }
-
-    .hamburger.active span:nth-child(1) {
-      top: 50%;
-      transform: translateY(-50%) rotate(45deg);
-    }
-
-    .hamburger.active span:nth-child(2) {
-      bottom: 50%;
-      transform: translateY(50%) rotate(-45deg);
-    }
-
-    /* Navigation Menu */
-    .nav-menu {
-      position: fixed;
-      top: 80px;
-      right: 40px;
-      background: rgba(20, 20, 20, 0.95);
-      backdrop-filter: blur(15px);
-      padding: 20px;
-      border-radius: 15px;
-      border: 1px solid rgba(0, 255, 255, 0.2);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      z-index: 999;
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: all 0.3s ease;
-      pointer-events: none;
-    }
-
-    .nav-menu.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: all;
-    }
-
-    .nav-menu a {
-      display: block;
-      color: #00ffff;
-      text-decoration: none;
-      padding: 12px 20px;
-      margin: 5px 0;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-
-    .nav-menu a:hover {
-      background: rgba(0, 255, 255, 0.1);
-      transform: translateX(5px);
-    }
-
-    /* Main Content */
-    .content {
-      padding-top: 100px;
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 20px;
-      background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(20, 20, 30, 0.9));
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
-      animation: pulse 4s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.6; }
-    }
-
-    .hero-content {
-      max-width: 800px;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      background: linear-gradient(45deg, #00ffff, #00b3b3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: slideUp 1s ease-out;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      color: #cccccc;
-      margin-bottom: 30px;
-      animation: slideUp 1s ease-out 0.2s both;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      animation: slideUp 1s ease-out 0.4s both;
-    }
-
-    .btn {
-      padding: 15px 30px;
-      border: 2px solid #00ffff;
-      border-radius: 50px;
-      background: transparent;
-      color: #00ffff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .btn:hover::before {
-      left: 100%;
-    }
-
-    .btn:hover {
-      background: rgba(0, 255, 255, 0.1);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
-    }
-
-    .btn-primary {
-      background: linear-gradient(45deg, #00ffff, #00b3b3);
-      color: #0a0a0a;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(45deg, #00b3b3, #00ffff);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
-    }
-
-    /* Sections */
-    .section {
-      padding: 100px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 60px;
-      color: #00ffff;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(45deg, #00ffff, #00b3b3);
-    }
-
-    /* About Section */
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .about-text {
-      font-size: 1.1rem;
-      color: #cccccc;
-      line-height: 1.8;
-    }
-
-    .about-image {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .about-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.3s ease;
-    }
-
-    .about-image:hover img {
-      transform: scale(1.05);
-    }
-
-    /* Skills Section */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .skill-card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 30px;
-      border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-5px);
-      border-color: #00ffff;
-      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
-    }
-
-    .skill-card h3 {
-      color: #00ffff;
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-
-    .skill-card p {
-      color: #cccccc;
-      font-size: 1rem;
-    }
-
-    /* Projects Section */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .project-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      border-color: #00ffff;
-      box-shadow: 0 15px 40px rgba(0, 255, 255, 0.1);
-    }
-
-    .project-image {
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(45deg, #00ffff, #00b3b3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #0a0a0a;
-      font-weight: 600;
-      font-size: 1.2rem;
-    }
-
-    .project-content {
-      padding: 25px;
-    }
-
-    .project-content h3 {
-      color: #00ffff;
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-
-    .project-content p {
-      color: #cccccc;
-      margin-bottom: 20px;
-    }
-
-    /* Contact Section */
-    .contact-content {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .contact-info {
-      margin-top: 40px;
-    }
-
-    .contact-item {
-      margin: 20px 0;
-      font-size: 1.1rem;
-      color: #cccccc;
-    }
-
-    .contact-item strong {
-      color: #00ffff;
-    }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 80px;
-    }
-
-    .footer p {
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    /* Animations */
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
-    }
-
-    .animate-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .header {
-        padding: 12px 20px;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .section {
-        padding: 60px 20px;
-      }
-
-      .skills-grid,
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .btn {
-        width: 200px;
-        text-align: center;
-      }
-    }
-
-    /* Popup Warning */
-    #popupWarning {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #f44336;
-      color: white;
-      padding: 14px 28px;
-      border-radius: 12px;
-      display: none;
-      z-index: 2000;
-      font-size: 15px;
-      font-weight: 600;
-      box-shadow: 0 0 15px #f44336cc;
-      animation: fadeInOut 1.2s ease forwards;
-    }
-
-    @keyframes fadeInOut {
-      0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(20px);
-      }
-      10%,
-      90% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(20px);
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengindraan Jauh & Sistem Informasi Geografis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 90%;
+            transform: scale(0.95);
+            transition: transform 0.8s ease;
+        }
+        
+        .slide.active .slide-content {
+            transform: scale(1);
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn:hover {
+            background: #2c5282;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .slide-number {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 1000;
+        }
+        
+        .title-slide {
+            text-align: center;
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .component-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+        
+        .slide.active .component-card {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .component-card:nth-child(1) { transition-delay: 0.1s; }
+        .component-card:nth-child(2) { transition-delay: 0.2s; }
+        .component-card:nth-child(3) { transition-delay: 0.3s; }
+        .component-card:nth-child(4) { transition-delay: 0.4s; }
+        .component-card:nth-child(5) { transition-delay: 0.5s; }
+        .component-card:nth-child(6) { transition-delay: 0.6s; }
+        
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+    </style>
 </head>
 <body>
-  <div class="header">
-    <div class="header-left">
-      <img src="Kazama.jpeg" alt="Gw Jelek" />
-      <div class="info">
-        <div>Muhammad Razzak Ramadhan</div>
-        <div>15 • Script Kiddie</div>
-      </div>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active" id="slide1" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/843c9a30-9e29-4770-ac45-5d44e057fdaf.png');">
+            <div class="slide-content title-slide">
+                <h1 class="text-4xl md:text-6xl font-bold text-blue-800 mb-4">Pengindraan Jauh &</h1>
+                <h2 class="text-3xl md:text-5xl font-bold text-green-600 mb-8">Sistem Informasi Geografis (SIG)</h2>
+                <p class="text-xl text-gray-600">Konsep Dasar dan Kegunaan</p>
+            </div>
+            <div class="floating-icons">
+                <div class="floating-icon" style="top: 20%; left: 10%;">🛰️</div>
+                <div class="floating-icon" style="top: 60%; right: 15%;">🌍</div>
+                <div class="floating-icon" style="bottom: 30%; left: 20%;">📡</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Pengertian Pengindraan Jauh -->
+        <div class="slide" id="slide2" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b9101b36-35b9-4e99-9794-613c3eb5f7b6.png');">
+            <div class="slide-content">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">Pengertian Pengindraan Jauh</h2>
+                <div class="space-y-4 text-lg">
+                    <p class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                        <strong>Ilmu dan teknik</strong> untuk memperoleh informasi tentang objek/gejala di permukaan bumi
+                    </p>
+                    <p class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <strong>Tanpa kontak langsung</strong> dengan objek yang diamati
+                    </p>
+                    <p class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                        Menggunakan <strong>sensor dan wahana</strong> (satelit, pesawat, drone)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Komponen Utama Pengindraan Jauh -->
+        <div class="slide" id="slide3" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/603dac7c-2a45-43dd-bf19-c4e075856741.png');">
+            <div class="slide-content">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">Komponen Utama Pengindraan Jauh</h2>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <h3 class="text-xl font-bold mb-2">1. Atmosfer</h3>
+                        <p>Lapisan udara pelindung bumi dari radiasi berbahaya</p>
+                    </div>
+                    <div class="component-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
+                        <h3 class="text-xl font-bold mb-2">2. Objek</h3>
+                        <p>Sasaran pengamatan (hutan, sawah, laut, bangunan)</p>
+                    </div>
+                    <div class="component-card" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
+                        <h3 class="text-xl font-bold mb-2">3. Sensor</h3>
+                        <p>Alat deteksi (kamera, radar, scanner, satelit)</p>
+                    </div>
+                    <div class="component-card" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                        <h3 class="text-xl font-bold mb-2">4. Wahana</h3>
+                        <p>Media pembawa sensor (satelit, pesawat, drone)</p>
+                    </div>
+                    <div class="component-card" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                        <h3 class="text-xl font-bold mb-2">5. Data</h3>
+                        <p>Informasi hasil sensor (citra, angka, peta)</p>
+                    </div>
+                    <div class="component-card" style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);">
+                        <h3 class="text-xl font-bold mb-2">6. Pengguna</h3>
+                        <p>Pemanfaat data (pemerintah, peneliti, masyarakat)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Kelebihan Pengindraan Jauh -->
+        <div class="slide" id="slide4" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/99aa6763-f5a4-4ff6-b621-4b612f4b290d.png');">
+            <div class="slide-content">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">Kelebihan Pengindraan Jauh</h2>
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-md">
+                        <div class="text-3xl text-green-500">🌐</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Mencakup Wilayah Luas</h3>
+                            <p class="text-gray-600">Dapat mengamati area yang sangat besar sekaligus</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-md">
+                        <div class="text-3xl text-red-500">⚠️</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Akses Daerah Berbahaya</h3>
+                            <p class="text-gray-600">Mampu merekam daerah yang sulit atau berbahaya dijangkau</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-md">
+                        <div class="text-3xl text-blue-500">🔄</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Pembaruan Berkala</h3>
+                            <p class="text-gray-600">Data dapat diperbarui secara rutin dan konsisten</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Kegunaan Pengindraan Jauh -->
+        <div class="slide" id="slide5" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/43b84e22-5056-4431-b0d6-141608d57ebb.png');">
+            <div class="slide-content">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">Kegunaan Pengindraan Jauh</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-100 p-4 rounded-lg text-center">
+                        <div class="text-4xl mb-3">🗺️</div>
+                        <h3 class="font-bold">Pemetaan Wilayah</h3>
+                        <p class="text-sm">Pembuatan peta digital yang akurat</p>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-lg text-center">
+                        <div class="text-4xl mb-3">🌳</div>
+                        <h3 class="font-bold">Pemantauan Lingkungan</h3>
+                        <p class="text-sm">Hutan, pertanian, dan perairan</p>
+                    </div>
+                    <div class="bg-red-100 p-4 rounded-lg text-center">
+                        <div class="text-4xl mb-3">🌊</div>
+                        <h3 class="font-bold">Deteksi Bencana Alam</h3>
+                        <p class="text-sm">Peringatan dini dan pemantauan</p>
+                    </div>
+                    <div class="bg-yellow-100 p-4 rounded-lg text-center">
+                        <div class="text-4xl mb-3">🏗️</div>
+                        <h3 class="font-bold">Perencanaan Pembangunan</h3>
+                        <p class="text-sm">Infrastruktur dan tata kota</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Pengertian SIG -->
+        <div class="slide" id="slide6" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/daa5ca73-0aac-4142-a52e-4d8d8ddd92c0.png');">
+            <div class="slide-content">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">Pengertian Sistem Informasi Geografis (SIG)</h2>
+                <div class="bg-gray-50 p-6 rounded-lg border-2 border-dashed border-blue-300">
+                    <p class="text-xl text-center font-semibold text-gray-700">
+                        "Sistem berbasis komputer untuk mengumpulkan, menyimpan, mengolah, menganalisis, dan menyajikan data yang berhubungan dengan permukaan bumi"
+                    </p>
+                </div>
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-bold text-blue-800">Karakteristik Utama:</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Berbasis komputer dan teknologi digital</li>
+                        <li>Mengintegrasikan data spasial dan atribut</li>
+                        <li>Mampu melakukan analisis keruangan</li>
+                        <li>Menghasilkan output visual (peta, grafik)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Komponen SIG -->
+        <div class="slide" id="slide7" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/586c6b31-8b7f-4f9b-97b3-e0025ac0ecfc.png');">
+            <div class="slide-content">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">Komponen Sistem Informasi Geografis (SIG)</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                        <div class="text-3xl mb-2 text-purple-500">💻</div>
+                        <h3 class="font-bold">Perangkat Keras</h3>
+                        <p class="text-sm">Komputer, GPS, scanner, plotter</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                        <div class="text-3xl mb-2 text-green-500">📊</div>
+                        <h3 class="font-bold">Perangkat Lunak</h3>
+                        <p class="text-sm">ArcGIS, QGIS, software pengolah data</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                        <div class="text-3xl mb-2 text-blue-500">🗃️</div>
+                        <h3 class="font-bold">Data</h3>
+                        <p class="text-sm">Spasial & non-spasial, peta dasar</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                        <div class="text-3xl mb-2 text-yellow-500">👥</div>
+                        <h3 class="font-bold">Manusia</h3>
+                        <p class="text-sm">Operator, analis, pengguna</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                        <div class="text-3xl mb-2 text-red-500">📋</div>
+                        <h3 class="font-bold">Metode</h3>
+                        <p class="text-sm">Prosedur analisis dan pengolahan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Fungsi SIG -->
+        <div class="slide" id="slide8" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b939dea-26c4-4247-b0f3-0ad7ce48eac2.png');">
+            <div class="slide-content">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">Fungsi Sistem Informasi Geografis (SIG)</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center p-4 bg-white rounded-lg shadow-md">
+                        <div class="text-2xl mr-4 text-blue-500">💾</div>
+                        <div>
+                            <h3 class="font-bold">Penyimpanan & Pengelolaan Data</h3>
+                            <p class="text-gray-600">Menyimpan dan mengelola data keruangan secara terstruktur</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 bg-white rounded-lg shadow-md">
+                        <div class="text-2xl mr-4 text-green-500">🗺️</div>
+                        <div>
+                            <h3 class="font-bold">Penyajian Informasi</h3>
+                            <p class="text-gray-600">Menyajikan informasi dalam bentuk peta digital yang interaktif</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 bg-white rounded-lg shadow-md">
+                        <div class="text-2xl mr-4 text-purple-500">🔍</div>
+                        <div>
+                            <h3 class="font-bold">Analisis Spasial</h3>
+                            <p class="text-gray-600">Membantu analisis tata ruang, transportasi, dan wilayah rawan bencana</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Kegunaan SIG -->
+        <div class="slide" id="slide9" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e85b02b-b829-48a4-a5f8-cf3f267db2bf.png');">
+            <div class="slide-content">
+                <h2 class="text-3xl font-bold text-blue-800 mb-6">Kegunaan Sistem Informasi Geografis (SIG)</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-100 p-4 rounded-lg">
+                        <h3 class="font-bold text-blue-800 mb-2">🏗️ Perencanaan Pembangunan</h3>
+                        <p class="text-sm">Perencanaan infrastruktur, tata kota, dan pembangunan wilayah</p>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-lg">
+                        <h3 class="font-bold text-green-800 mb-2">🌿 Pengelolaan SDA</h3>
+                        <p class="text-sm">Pengelolaan sumber daya alam dan lingkungan</p>
+                    </div>
+                    <div class="bg-red-100 p-4 rounded-lg">
+                        <h3 class="font-bold text-red-800 mb-2">🚨 Penanggulangan Bencana</h3>
+                        <p class="text-sm">Mitigasi dan penanganan bencana alam</p>
+                    </div>
+                    <div class="bg-yellow-100 p-4 rounded-lg">
+                        <h3 class="font-bold text-yellow-800 mb-2">🔬 Analisis Lingkungan</h3>
+                        <p class="text-sm">Studi dan monitoring perubahan lingkungan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Ringkasan -->
+        <div class="slide" id="slide10" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1427f6fd-99f6-41cc-be49-dda3bc37d43c.png');">
+            <div class="slide-content text-center">
+                <h2 class="text-4xl font-bold text-blue-800 mb-8">📌 Ringkasan</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-3">Pengindraan Jauh</h3>
+                        <p class="text-gray-700">
+                            Cara mendapatkan data/geoinformasi dari jarak jauh dengan sensor & citra
+                        </p>
+                        <div class="mt-4 text-blue-500 text-4xl">🛰️</div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold text-green-700 mb-3">Sistem Informasi Geografis</h3>
+                        <p class="text-gray-700">
+                            Sistem komputer untuk mengolah & menganalisis data spasial menjadi peta & informasi
+                        </p>
+                        <div class="mt-4 text-green-500 text-4xl">🌐</div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-blue-500 to-green-500 text-white p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-2">Sinergi Keduanya</h3>
+                    <p>Pengindraan Jauh menyediakan data, SIG mengolah dan menganalisis data tersebut untuk keputusan yang lebih baik</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-number">
+            Slide <span id="current-slide">1</span>/10
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">Sebelumnya</button>
+            <button class="nav-btn" onclick="nextSlide()">Berikutnya</button>
+        </div>
     </div>
-    <div class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-    </div>
-  </div>
 
-  <nav class="nav-menu" id="navMenu">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
 
-  <div id="popupWarning">Tunggu 1 detik, jangan nyepam woy</div>
-
-  <main class="content">
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-content">
-        <h1>Full Made By AI :(</h1>
-        <p>I Am Piece Of Useless, No Skill No Frends</p>
-        <div class="hero-buttons">
-          <a href="#projects" class="btn btn-primary">Gak Ada portofolio</a>
-          <a href="#contact" class="btn">Lonely</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>I Am Useless I Am Dump I Am Lazy Not To Do Even I Am Not Worh Of An Money</p>
-          </div>
-        <div class="about-image">
-          <img src="Kazama.jpeg" alt="Muhammad Razzak Ramadhan - Crazy People" />
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-      <h2 class="section-title">My Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-card animate-on-scroll">
-          <h3>Pure AI</h3>
-          <p>Pure Useless</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-      <h2 class="section-title">My Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card animate-on-scroll">
-          <img src="Kazama.jpeg" alt="Males Baikin Ah Mending Tidur" />
-          <div class="project-content">
-            <h3>TheNoting </h3>
-            <p>Everything Is Ai🥀</p></p>
-            <a href="https://github.com/MehogaYT/TheNoting" class="btn" target="_blank">View Project</a>
-          </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-      <h2 class="section-title">Get In Touch</h2>
-      <div class="contact-content">
-        <p>I'm always an looser they call me Big L</p>
-            <div class="contact-item">
-            <strong>GitHub:</strong> <a href="https://github.com/MehogaYT" style="color: #00ffff; text-decoration: none;">MehogaYT</a>
-          </div>
-          <div class="contact-item">
-            <strong>Location:</strong> Undefined
-          </div>
-        </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>&copy; 2010-2025 Muhammad Razzak Ramadhan. Go Die </p>
-  </footer>
-
-  <script>
-    // Navigation
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-
-    function toggleMenu() {
-      hamburger.classList.toggle('active');
-      navMenu.classList.toggle('show');
-    }
-
-    hamburger.addEventListener('click', toggleMenu);
-
-    // Close menu when clicking on nav links
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('show');
-      });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
-      if (!navMenu.contains(event.target) && !hamburger.contains(event.target)) {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('show');
-      }
-    });
-
-    // Scroll animations
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-
-    function checkVisibility() {
-      animatedElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight - 100;
-        if (isVisible) {
-          el.classList.add('visible');
+        function showSlide(n) {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            document.getElementById(`slide${n}`).classList.add('active');
+            
+            // Update slide number
+            document.getElementById('current-slide').textContent = n;
+            currentSlide = n;
         }
-      });
-    }
 
-    window.addEventListener('scroll', checkVisibility);
-    window.addEventListener('load', checkVisibility);
-
-    // Smooth scrolling for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
         }
-      });
-    });
-  </script>
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Touch swipe for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        }
+    </script>
 </body>
 </html>
+
