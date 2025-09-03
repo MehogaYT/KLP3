@@ -1,168 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pengindraan Jauh & Sistem Informasi Geografis</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            min-height: 100vh;
-            overflow: hidden;
-        }
-        
-        .presentation-container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-in-out;
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: overlay;
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        
-        .slide.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .slide-content {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            max-width: 900px;
-            width: 90%;
-            transform: scale(0.95);
-            transition: transform 0.8s ease;
-        }
-        
-        .slide.active .slide-content {
-            transform: scale(1);
-        }
-        
-        .navigation {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-            z-index: 1000;
-        }
-        
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .nav-btn:hover {
-            background: #2c5282;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .slide-number {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            z-index: 1000;
-        }
-        
-        .title-slide {
-            text-align: center;
-        }
-        
-        .component-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .component-card {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            padding: 1.5rem;
-            border-radius: 15px;
-            color: white;
-            text-align: center;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.6s ease;
-        }
-        
-        .slide.active .component-card {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .component-card:nth-child(1) { transition-delay: 0.1s; }
-        .component-card:nth-child(2) { transition-delay: 0.2s; }
-        .component-card:nth-child(3) { transition-delay: 0.3s; }
-        .component-card:nth-child(4) { transition-delay: 0.4s; }
-        .component-card:nth-child(5) { transition-delay: 0.5s; }
-        .component-card:nth-child(6) { transition-delay: 0.6s; }
-        
-        .floating-icons {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        
-        .floating-icon {
-            position: absolute;
-            font-size: 3rem;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <div class="presentation-container">
-        <!-- Slide 1: Title -->
+        <!-- Slide 1 -->
         <div class="slide active" id="slide1" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/843c9a30-9e29-4770-ac45-5d44e057fdaf.png');">
             <div class="slide-content title-slide">
                 <h1 class="text-4xl md:text-6xl font-bold text-blue-800 mb-4">Pengindraan Jauh &</h1>
@@ -176,7 +23,7 @@
             </div>
         </div>
 
-        <!-- Slide 2: Pengertian Pengindraan Jauh -->
+        <!-- Slide 2 -->
         <div class="slide" id="slide2" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b9101b36-35b9-4e99-9794-613c3eb5f7b6.png');">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6">Pengertian Pengindraan Jauh</h2>
@@ -194,7 +41,7 @@
             </div>
         </div>
 
-        <!-- Slide 3: Komponen Utama Pengindraan Jauh -->
+        <!-- Slide 3 -->
         <div class="slide" id="slide3" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/603dac7c-2a45-43dd-bf19-c4e075856741.png');">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6">Komponen Utama Pengindraan Jauh</h2>
@@ -227,7 +74,7 @@
             </div>
         </div>
 
-        <!-- Slide 4: Kelebihan Pengindraan Jauh -->
+        <!-- Slide 4 -->
         <div class="slide" id="slide4" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/99aa6763-f5a4-4ff6-b621-4b612f4b290d.png');">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6">Kelebihan Pengindraan Jauh</h2>
@@ -257,7 +104,7 @@
             </div>
         </div>
 
-        <!-- Slide 5: Kegunaan Pengindraan Jauh -->
+        <!-- Slide 5 -->
         <div class="slide" id="slide5" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/43b84e22-5056-4431-b0d6-141608d57ebb.png');">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6">Kegunaan Pengindraan Jauh</h2>
@@ -286,7 +133,7 @@
             </div>
         </div>
 
-        <!-- Slide 6: Pengertian SIG -->
+        <!-- Slide 6 -->
         <div class="slide" id="slide6" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/daa5ca73-0aac-4142-a52e-4d8d8ddd92c0.png');">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6">Pengertian Sistem Informasi Geografis (SIG)</h2>
@@ -307,7 +154,7 @@
             </div>
         </div>
 
-        <!-- Slide 7: Komponen SIG -->
+        <!-- Slide 7 -->
         <div class="slide" id="slide7" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/586c6b31-8b7f-4f9b-97b3-e0025ac0ecfc.png');">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6">Komponen Sistem Informasi Geografis (SIG)</h2>
@@ -341,7 +188,7 @@
             </div>
         </div>
 
-        <!-- Slide 8: Fungsi SIG -->
+        <!-- Slide 8 -->
         <div class="slide" id="slide8" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b939dea-26c4-4247-b0f3-0ad7ce48eac2.png');">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6">Fungsi Sistem Informasi Geografis (SIG)</h2>
@@ -371,7 +218,7 @@
             </div>
         </div>
 
-        <!-- Slide 9: Kegunaan SIG -->
+        <!-- Slide 9 -->
         <div class="slide" id="slide9" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e85b02b-b829-48a4-a5f8-cf3f267db2bf.png');">
             <div class="slide-content">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6">Kegunaan Sistem Informasi Geografis (SIG)</h2>
@@ -395,8 +242,8 @@
                 </div>
             </div>
         </div>
-
-        <!-- Slide 10: Ringkasan -->
+        
+         <!-- Slide 10 -->
         <div class="slide" id="slide10" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1427f6fd-99f6-41cc-be49-dda3bc37d43c.png');">
             <div class="slide-content text-center">
                 <h2 class="text-4xl font-bold text-blue-800 mb-8">📌 Ringkasan</h2>
@@ -441,15 +288,10 @@
         const totalSlides = 10;
 
         function showSlide(n) {
-            // Hide all slides
             document.querySelectorAll('.slide').forEach(slide => {
                 slide.classList.remove('active');
             });
-            
-            // Show current slide
             document.getElementById(`slide${n}`).classList.add('active');
-            
-            // Update slide number
             document.getElementById('current-slide').textContent = n;
             currentSlide = n;
         }
@@ -466,13 +308,11 @@
             }
         }
 
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', e => {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
         });
 
-        // Touch swipe for mobile
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -482,14 +322,9 @@
 
         document.addEventListener('touchend', e => {
             touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
             if (touchEndX < touchStartX - 50) nextSlide();
             if (touchEndX > touchStartX + 50) prevSlide();
-        }
+        });
     </script>
 </body>
 </html>
-
