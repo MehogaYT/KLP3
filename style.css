@@ -20,51 +20,57 @@ body {
     overflow: hidden;
 }
 
+/* Base slide style */
 .slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    opacity: 0;
-    transform: scale(0.8) translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     background-size: cover;
     background-position: center;
     background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transform: scale(0.85) translateY(40px);
+    filter: blur(4px);
     pointer-events: none;
+    transition:
+        opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 0.9s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 0;
 }
 
+/* Active slide style */
 .slide.active {
     opacity: 1;
     transform: scale(1) translateY(0);
+    filter: blur(0);
     pointer-events: auto;
     z-index: 10;
 }
 
+/* Slide content with subtle scale up */
 .slide-content {
     background: rgba(255, 255, 255, 0.95);
     padding: 3rem;
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
     max-width: 900px;
     width: 90%;
     transform: scale(0.95);
-    transition: transform 0.8s ease;
+    transition: transform 0.9s ease;
 }
 
 .slide.active .slide-content {
     transform: scale(1);
 }
 
+/* Navigation buttons */
 .navigation {
     position: fixed;
     bottom: 2rem;
@@ -76,37 +82,60 @@ body {
 }
 
 .nav-btn {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border: none;
-    padding: 12px 24px;
+    padding: 14px 28px;
     border-radius: 50px;
     cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1a202c;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .nav-btn:hover {
-    background: #2c5282;
+    background-color: #2c5282;
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-4px);
 }
 
+/* Slide number */
 .slide-number {
     position: fixed;
     top: 2rem;
     right: 2rem;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1a202c;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     z-index: 1000;
 }
 
-.title-slide {
-    text-align: center;
+/* Floating icons with gentle float animation */
+.floating-icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
+.floating-icon {
+    position: absolute;
+    font-size: 3.5rem;
+    opacity: 0.12;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(12deg); }
+}
+
+/* Component cards with fade and slide up */
 .component-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -120,9 +149,9 @@ body {
     border-radius: 15px;
     color: white;
     text-align: center;
-    transform: translateY(20px);
+    transform: translateY(30px);
     opacity: 0;
-    transition: all 0.6s ease;
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .slide.active .component-card {
@@ -130,13 +159,129 @@ body {
     opacity: 1;
 }
 
-.component-card:nth-child(1) { transition-delay: 0.1s; }
-.component-card:nth-child(2) { transition-delay: 0.2s; }
-.component-card:nth-child(3) { transition-delay: 0.3s; }
-.component-card:nth-child(4) { transition-delay: 0.4s; }
-.component-card:nth-child(5) { transition-delay: 0.5s; }
-.component-card:nth-child(6) { transition-delay: 0.6s; }
+.component-card:nth-child(1) { transition-delay: 0.15s; }
+.component-card:nth-child(2) { transition-delay: 0.3s; }
+.component-card:nth-child(3) { transition-delay: 0.45s; }
+.component-card:nth-child(4) { transition-delay: 0.6s; }
+.component-card:nth-child(5) { transition-delay: 0.75s; }
+.component-card:nth-child(6) { transition-delay: 0.9s; }@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.presentation-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Base slide style */
+.slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transform: scale(0.85) translateY(40px);
+    filter: blur(4px);
+    pointer-events: none;
+    transition:
+        opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+}
+
+/* Active slide style */
+.slide.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    pointer-events: auto;
+    z-index: 10;
+}
+
+/* Slide content with subtle scale up */
+.slide-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    max-width: 900px;
+    width: 90%;
+    transform: scale(0.95);
+    transition: transform 0.9s ease;
+}
+
+.slide.active .slide-content {
+    transform: scale(1);
+}
+
+/* Navigation buttons */
+.navigation {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 1000;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1a202c;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #2c5282;
+    color: white;
+    transform: translateY(-4px);
+}
+
+/* Slide number */
+.slide-number {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1a202c;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+/* Floating icons with gentle float animation */
 .floating-icons {
     position: absolute;
     width: 100%;
@@ -146,12 +291,43 @@ body {
 
 .floating-icon {
     position: absolute;
-    font-size: 3rem;
-    opacity: 0.1;
+    font-size: 3.5rem;
+    opacity: 0.12;
     animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(10deg); }
+    50% { transform: translateY(-25px) rotate(12deg); }
 }
+
+/* Component cards with fade and slide up */
+.component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.component-card {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    padding: 1.5rem;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.slide.active .component-card {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.component-card:nth-child(1) { transition-delay: 0.15s; }
+.component-card:nth-child(2) { transition-delay: 0.3s; }
+.component-card:nth-child(3) { transition-delay: 0.45s; }
+.component-card:nth-child(4) { transition-delay: 0.6s; }
+.component-card:nth-child(5) { transition-delay: 0.75s; }
+.component-card:nth-child(6) { transition-delay: 0.9s; }
